@@ -1,10 +1,10 @@
 
 This project is a high-speed, Formula 1-inspired Reaction Game developed for a Computer Architecture and Design course at the University of Naples Federico II.
-+1
+
 
 🏎️ Project Overview: F1 Reaction Test
 Inspired by the rigorous training of F1 pilots—specifically the lightning-fast reflexes required to activate and deactivate DRS—this system challenges two players to a head-to-head speed test. The goal is simple: be the first to hit your button when the "GO!" signal appears, measuring reaction times with millisecond precision.
-+3
+
 
 🛠️ Hardware Requirements
 The system uses a distributed architecture with three microcontrollers:
@@ -18,30 +18,30 @@ The system uses a distributed architecture with three microcontrollers:
 Peripherals:
 
 3x 0.96” OLED Displays (SSD1306) for real-time feedback.
-+3
+
 
 2x Active Piezo Buzzers for auditory cues.
 
 1x Green LED (Start Signal).
-+1
+
 
 3x Breadboards, 330 Ohm resistors, and various jumpers (M-M/F-M).
-+1
+
 
 📡 Communication Protocols
 The project utilizes a multi-protocol approach to handle data and visuals:
 
 
 UART (The Neural Network): Used for the primary communication between the Master and Player nodes. The Master sends commands (RESET, GO) and receive reaction timestamps through dedicated channels.
-+1
+
 
 
 I2C (The Eyes): Each node uses the I2C protocol to drive its own OLED display, providing players with status updates like "READY!", "GO!", or "YOU WIN!".
-+2
+
 
 🧠 Software Architecture
 The system is built on a Finite State Machine (FSM) paradigm to ensure deterministic behavior and millisecond accuracy.
-+1
+
 
 Master Node States
 
@@ -49,7 +49,7 @@ IDLE: Waiting for the Master user button to start a match.
 
 
 WAITING: A randomized delay (1–10 seconds) to prevent players from anticipating the start.
-+1
+
 
 
 LED_ON: The "GO!" signal is active; the Master awaits reaction data.
@@ -79,7 +79,7 @@ Anti-Cheating: Randomized start delays and false start detection.
 
 
 Multi-Modal Feedback: Visual (OLED/LED) and auditory (Buzzer) indicators.
-+1
+
 
 
 Tie Handling: Experimental logic where a simultaneous press results in a double loss.
