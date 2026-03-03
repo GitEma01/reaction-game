@@ -1,4 +1,4 @@
-Gemini ha detto
+
 This project is a high-speed, Formula 1-inspired Reaction Game developed for a Computer Architecture and Design course at the University of Naples Federico II.
 +1
 
