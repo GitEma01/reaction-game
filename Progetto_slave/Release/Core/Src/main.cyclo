@@ -1,0 +1,15 @@
+../Core/Src/main.c:445:6:SendReactionTime	1
+../Core/Src/main.c:452:10:GetCurrentTime	1
+../Core/Src/main.c:456:6:ActivateBuzzer	1
+../Core/Src/main.c:462:6:DeactivateBuzzer	1
+../Core/Src/main.c:467:6:ResetSlave	1
+../Core/Src/main.c:484:6:ShowGameResult	2
+../Core/Src/main.c:510:6:DisplayIdleScreen	1
+../Core/Src/main.c:522:6:DisplayReadyScreen	1
+../Core/Src/main.c:532:6:DisplayGoScreen	1
+../Core/Src/main.c:413:6:ProcessUARTCommand	5
+../Core/Src/main.c:540:6:DisplayPressedScreen	1
+../Core/Src/main.c:548:6:HAL_UART_RxCpltCallback	4
+../Core/Src/main.c:567:6:Error_Handler	1
+../Core/Src/main.c:208:6:SystemClock_Config	2
+../Core/Src/main.c:97:5:main	15

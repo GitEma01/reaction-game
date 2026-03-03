@@ -1,0 +1,15 @@
+../Core/Src/main.c:445:6:SendReactionTime	8	static
+../Core/Src/main.c:452:10:GetCurrentTime	0	static
+../Core/Src/main.c:456:6:ActivateBuzzer	8	static
+../Core/Src/main.c:462:6:DeactivateBuzzer	8	static
+../Core/Src/main.c:467:6:ResetSlave	8	static
+../Core/Src/main.c:484:6:ShowGameResult	24	static
+../Core/Src/main.c:510:6:DisplayIdleScreen	24	static
+../Core/Src/main.c:522:6:DisplayReadyScreen	16	static
+../Core/Src/main.c:532:6:DisplayGoScreen	16	static
+../Core/Src/main.c:413:6:ProcessUARTCommand	8	static
+../Core/Src/main.c:540:6:DisplayPressedScreen	16	static
+../Core/Src/main.c:548:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/main.c:567:6:Error_Handler	8	static,ignoring_inline_asm
+../Core/Src/main.c:208:6:SystemClock_Config	72	static
+../Core/Src/main.c:97:5:main	72	static
