@@ -1,73 +1,95 @@
-Traffic Forecasting App
-An interactive web application built with Streamlit to predict hourly traffic volume (vehicles/hour) using an XGBoost machine learning model.
+Gemini ha detto
+This project is a high-speed, Formula 1-inspired Reaction Game developed for a Computer Architecture and Design course at the University of Naples Federico II.
++1
 
-The application allows users to simulate traffic conditions by providing custom inputs such as date, time, weather conditions, and temperature. It supports both validation on historical data and future projections using a rolling forecast logic.
+🏎️ Project Overview: F1 Reaction Test
+Inspired by the rigorous training of F1 pilots—specifically the lightning-fast reflexes required to activate and deactivate DRS—this system challenges two players to a head-to-head speed test. The goal is simple: be the first to hit your button when the "GO!" signal appears, measuring reaction times with millisecond precision.
++3
 
-Key Features
-Two Prediction Modes:
+🛠️ Hardware Requirements
+The system uses a distributed architecture with three microcontrollers:
 
-Historical Mode (2012-2018): Extracts actual lags (past data) from the dataset, generates the prediction, and compares it with the Ground Truth, calculating the percentage error. Useful for testing model accuracy.
 
-Future Mode (>2018): Uses an iterative approach (Rolling Forecast) to predict traffic hour by hour into the future, feeding past predictions as new inputs (lags) for subsequent hours.
+1x Master Node: STM32F401-RE Nucleo 64.
 
-Dynamic Feature Engineering: The code calculates temporal variables (cyclic encoding with sine/cosine), lag variables (1h, 24h, 168h), rolling statistics (rolling mean/std), and weather variables on the fly.
 
-Interactive Visualization: Uses Plotly to visually compare the point prediction with the typical average traffic pattern (weekdays vs. weekends).
+2x Player Nodes: STM32F303 Discovery boards.
 
-Traffic Level Indicator: Intuitively classifies traffic into 4 levels (Low, Medium, High, Very High).
+Peripherals:
 
-Assumed Project Structure
-For this script to work correctly, the project must follow this folder hierarchy (as defined by the Path calls in the code):
+3x 0.96” OLED Displays (SSD1306) for real-time feedback.
++3
 
-Plaintext
-your-project/
- |-- models/
- |   |-- xgboost_model_final.pkl      # Trained XGBoost model
- |-- data/
- |   |-- traffic_processed.csv        # Processed historical dataset
- |   |-- feature_columns.json         # JSON with the exact list of features
- |-- app/ (or main folder)
- |   |-- pages/
- |       |-- 3_previsioni.py          # This Streamlit script
- |-- README.md
-Installation and Setup
-Clone the repository:
+2x Active Piezo Buzzers for auditory cues.
 
-Bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
-Create a virtual environment (recommended):
+1x Green LED (Start Signal).
++1
 
-Bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-Install dependencies:
-Make sure you have the following libraries installed. You can use a requirements.txt file or install them manually:
+3x Breadboards, 330 Ohm resistors, and various jumpers (M-M/F-M).
++1
 
-Bash
-pip install streamlit pandas numpy plotly joblib xgboost scikit-learn
-Run the Streamlit app:
+📡 Communication Protocols
+The project utilizes a multi-protocol approach to handle data and visuals:
 
-Bash
-streamlit run app/pages/3_previsioni.py
-(Note: if you are using Streamlit's multipage navigation system, run the main app.py file).
 
-Model Details (Machine Learning)
-Algorithm: XGBoost Regressor
+UART (The Neural Network): Used for the primary communication between the Master and Player nodes. The Master sends commands (RESET, GO) and receive reaction timestamps through dedicated channels.
++1
 
-Target: traffic_volume (vehicles/hour)
 
-Training Data: Historical data from 2012 to 2018.
+I2C (The Eyes): Each node uses the I2C protocol to drive its own OLED display, providing players with status updates like "READY!", "GO!", or "YOU WIN!".
++2
 
-Considered Inputs:
+🧠 Software Architecture
+The system is built on a Finite State Machine (FSM) paradigm to ensure deterministic behavior and millisecond accuracy.
++1
 
-Temporal: Hour, day of the week, month, holidays, rush hours.
+Master Node States
 
-Weather: Temperature, weather type (Clear, Rain, Snow, etc.), precipitation.
+IDLE: Waiting for the Master user button to start a match.
 
-Historical (Lags): Traffic values from the previous 1h, 2h, 3h, 24h, and 168h.
 
-Known Limitations
-In Future Mode, predicting dates very far ahead (months or years beyond the dataset) causes a drop in accuracy, as the rolling forecast error accumulates iteration after iteration.
+WAITING: A randomized delay (1–10 seconds) to prevent players from anticipating the start.
++1
 
-The app assumes the user is testing an already trained model. If the files in /models or /data are missing, the app will display a warning and stop.
+
+LED_ON: The "GO!" signal is active; the Master awaits reaction data.
+
+
+FINISHED: Calculates the winner and transmits results.
+
+
+FALSE_START: Triggered if a player presses their button prematurely.
+
+Player Node States
+
+IDLE/READY: Sychronizing with the Master's reset command.
+
+
+BUTTON_PRESSED: Captures the local timestamp and calculates the reaction delta.
+
+
+SHOW_RESULT: Displays individual victory or defeat screens.
+
+🏁 Key Features
+
+Millisecond Precision: Accurate reaction time calculation.
+
+
+Anti-Cheating: Randomized start delays and false start detection.
+
+
+Multi-Modal Feedback: Visual (OLED/LED) and auditory (Buzzer) indicators.
++1
+
+
+Tie Handling: Experimental logic where a simultaneous press results in a double loss.
+
+👥 The Team
+Dott. Alberto Stravato 
+
+Dott. Emanuele Santacroce 
+
+Dott. Francesco Floriano 
+
+
+Supervised by: Prof. Nicola Mazzocca
